@@ -12,5 +12,7 @@ public class ProyectoPC05ArbolesDeRecubrimiento {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        System.out.println("Preuba");
+        System.out.println("Testeo");
     }
 }
