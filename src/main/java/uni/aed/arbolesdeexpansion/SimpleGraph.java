@@ -3,12 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package uni.aed.arbolesdeexpansion;
+
 import java.util.*;
+
 /**
  *
  * @author Max--
  */
-public class SimpleGraph implements Graph {
+class SimpleGraph implements Graph {
     private int vertexCount;
     private List<Edge> edges;
 
