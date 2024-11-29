@@ -1,29 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uni.aed.arbolesdeexpansion;
-import java.util.*;
-/**
- *
- * @author Max--
- */
+import uni.aed.tda.listTDA.ListTDA;
+import Complementos.Sort;
+import uni.aed.tda.linkedlistTDA.Iterador;
+import uni.aed.tda.linkedlistTDA.LinkedListTDA;
+
 public class Kruskal {
-    public static List<Edge> findMST(Graph graph) {
-        List<Edge> mst = new ArrayList<>();
-        List<Edge> edges = graph.getEdges();
+    public static LinkedListTDA<Edge> findMST(Graph graph) {
+        LinkedListTDA<Edge> mst = new LinkedListTDA<>();
+        LinkedListTDA<Edge> edges = graph.getEdges();
         int vertexCount = graph.getVertexCount();
-
-        Collections.sort(edges);
-
+        Sort.sort(edges); // Assuming this correctly sorts the edges by weight
         DisjointSet disjointSet = new DisjointSet(vertexCount);
-
-        for (Edge edge : edges) {
-            int x = disjointSet.find(edge.src);
-            int y = disjointSet.find(edge.dest);
+        
+        Iterador<Edge> edgeIterator = new Iterador<>(edges);
+        
+        while (edgeIterator.hasNext()) {
+            Edge currentEdge = edgeIterator.next();
+            int x = disjointSet.find(currentEdge.src);
+            int y = disjointSet.find(currentEdge.dest);
 
             if (x != y) {
-                mst.add(edge);
+                mst.add(currentEdge);
                 disjointSet.union(x, y);
             }
         }
@@ -31,3 +28,4 @@ public class Kruskal {
         return mst;
     }
 }
+

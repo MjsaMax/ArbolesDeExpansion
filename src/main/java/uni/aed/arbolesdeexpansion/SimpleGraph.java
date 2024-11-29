@@ -3,20 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package uni.aed.arbolesdeexpansion;
-
-import java.util.*;
+import uni.aed.tda.linkedlistTDA.LinkedListTDA;
+import uni.aed.tda.arraylistTDA.ArrayListTDA;
 
 /**
  *
  * @author Max--
  */
 class SimpleGraph implements Graph {
-    private int vertexCount;
-    private List<Edge> edges;
+    private final int vertexCount;
+    private LinkedListTDA<Edge> edges;
 
     public SimpleGraph(int vertexCount) {
         this.vertexCount = vertexCount;
-        this.edges = new ArrayList<>();
+        this.edges = new LinkedListTDA<>();
     }
 
     @Override
@@ -25,7 +25,7 @@ class SimpleGraph implements Graph {
     }
 
     @Override
-    public List<Edge> getEdges() {
+    public LinkedListTDA<Edge> getEdges() {
         return edges;
     }
 
