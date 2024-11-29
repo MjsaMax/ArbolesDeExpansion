@@ -5,7 +5,7 @@ import uni.aed.tda.listTDA.ListTDA;
 
 public class LinkedListTDA<E> implements ListTDA<E> {
     public static final int NO_ENCONTRADO=-1;
-    private Nodo<E> head;
+    public Nodo<E> head;
     private Nodo<E> cola;
     private int count;
 
@@ -127,7 +127,6 @@ public class LinkedListTDA<E> implements ListTDA<E> {
         count--;        
         return (E)nodoDelete.getData();
     }
-
     @Override
     public boolean delete(E data) {
         boolean resultado=false;
