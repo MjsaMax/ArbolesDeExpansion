@@ -4,10 +4,14 @@ import uni.aed.tda.listTDA.IteratorTDA;
 import uni.aed.tda.listTDA.NoSuchElementException;
 
 public class Iterador<E> implements IteratorTDA<E> {
-    private Nodo<E> actual;
+    public Nodo<E> actual;
+    private LinkedListTDA linkedlist;
 
-    public Iterador(Nodo<E> actual) {
+   public Iterador(Nodo<E> actual){
         this.actual = actual;
+    }
+    public Iterador(LinkedListTDA<E> linkedlist){
+        this.actual = linkedlist.head;
     }
 
     @Override
