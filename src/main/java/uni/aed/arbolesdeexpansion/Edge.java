@@ -1,14 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uni.aed.arbolesdeexpansion;
 
-/**
- *
- * @author Max--
- */
-// Edge class to represent graph edges
 public class Edge implements Comparable<Edge> {
     int src, dest, weight;
 
@@ -20,6 +11,12 @@ public class Edge implements Comparable<Edge> {
 
     @Override
     public int compareTo(Edge other) {
-        return this.weight - other.weight;
+        return Integer.compare(this.weight, other.weight);
+    }
+
+    @Override
+    public String toString() {
+        return "Edge{" + "src=" + src + ", dest=" + dest + ", weight=" + weight + '}';
     }
 }
+
