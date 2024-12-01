@@ -4,69 +4,96 @@
  */
 package uni.aed.proyectofinal;
 
-import java.awt.*;
-import java.util.Map;
+
 import javax.swing.*;
+import java.awt.*;
+import java.awt.geom.*;
+import java.util.Map;
 import java.util.List;
 
-/**
- *
- * @author Walter
- */
-public class PanelGraficoAppInside extends JPanel {
-    private Grafo grafo; // El grafo que vas a dibujar
-    private Map<Integer, Point> posicionesVertices; // Posiciones de los vértices
-    private List<Arista> aristasDestacadas; // Opcional: aristas a destacar
 
-    public PanelGraficoAppInside(Grafo grafo, Map<Integer, Point> posicionesVertices) {
+public class PanelGraficoAppInside extends JPanel {
+    private Grafo grafo;
+    private Map<Integer, Point> posicionesPostes;
+    private List<Arista> cablesDestacados;
+    private Image fondoCiudad;
+
+    public PanelGraficoAppInside(Grafo grafo, Map<Integer, Point> posicionesPostes) {
         this.grafo = grafo;
-        this.posicionesVertices = posicionesVertices;
-        setPreferredSize(new Dimension(400, 300)); // Dimensiones por defecto
-        setBackground(Color.WHITE); // Fondo claro para el panel
-        setOpaque(true);
+        this.posicionesPostes = posicionesPostes;
+        setPreferredSize(new Dimension(800, 600));
+        cargarFondoCiudad();
     }
 
-    // Método para establecer aristas destacadas (opcional)
-    public void setAristasDestacadas(List<Arista> destacadas) {
-        this.aristasDestacadas = destacadas;
-        repaint(); // Redibuja el panel
+    private void cargarFondoCiudad() {
+        try {
+            fondoCiudad = new ImageIcon(getClass().getResource("/imagenes/fondo_ciudad_electrica.png")).getImage();
+        } catch (Exception e) {
+            System.err.println("Error al cargar la imagen de fondo: " + e.getMessage());
+        }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); // Limpia el fondo
-
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Dibuja las aristas
+        // Dibujar fondo de la ciudad
+        if (fondoCiudad != null) {
+            g2d.drawImage(fondoCiudad, 0, 0, getWidth(), getHeight(), this);
+        }
+
+        // Dibujar cables (aristas)
         for (Arista a : grafo.getAristas()) {
-            Point p1 = posicionesVertices.get(a.getOrigen());
-            Point p2 = posicionesVertices.get(a.getDestino());
-            if (p1 != null && p2 != null) {
-                if (aristasDestacadas != null && aristasDestacadas.contains(a)) {
-                    g2d.setColor(Color.RED); // Colorea aristas destacadas en rojo
+            Point inicio = posicionesPostes.get(a.getOrigen());
+            Point fin = posicionesPostes.get(a.getDestino());
+            if (inicio != null && fin != null) {
+                if (cablesDestacados != null && cablesDestacados.contains(a)) {
+                    g2d.setColor(new Color(255, 215, 0, 200)); // Dorado semi-transparente para cables destacados
+                    g2d.setStroke(new BasicStroke(6f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                 } else {
-                    g2d.setColor(Color.BLACK); // Aristas normales en negro
+                    g2d.setColor(new Color(50, 50, 50, 150)); // Gris oscuro semi-transparente para cables normales
+                    g2d.setStroke(new BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                 }
-                g2d.drawLine(p1.x, p1.y, p2.x, p2.y);
+                g2d.draw(new Line2D.Float(inicio, fin));
 
-                // Dibuja el peso de la arista
-                int midX = (p1.x + p2.x) / 2;
-                int midY = (p1.y + p2.y) / 2;
-                g2d.drawString(String.valueOf(a.getPeso()), midX, midY);
+                // Dibujar longitud del cable
+                int midX = (inicio.x + fin.x) / 2;
+                int midY = (inicio.y + fin.y) / 2;
+                g2d.setFont(new Font("Arial", Font.BOLD, 12));
+                g2d.setColor(Color.WHITE);
+                String longitud = a.getPeso() + " m";
+                g2d.drawString(longitud, midX, midY);
             }
         }
 
-        // Dibuja los vértices
-        for (Map.Entry<Integer, Point> entry : posicionesVertices.entrySet()) {
+        // Dibujar postes (vértices)
+        int posteSize = 30;
+        for (Map.Entry<Integer, Point> entry : posicionesPostes.entrySet()) {
             Point p = entry.getValue();
-            g2d.setColor(Color.BLACK);
-            g2d.fillOval(p.x - 10, p.y - 10, 20, 20); // Dibuja un círculo para el vértice
+            // Dibujar poste
+            g2d.setColor(new Color(139, 69, 19)); // Marrón para el poste
+            g2d.fill(new Rectangle2D.Double(p.x - posteSize / 4, p.y - posteSize / 2, posteSize / 2, posteSize));
+            // Dibujar transformador
+            g2d.setColor(new Color(169, 169, 169)); // Gris para el transformador
+            g2d.fill(new Ellipse2D.Double(p.x - posteSize / 2, p.y - posteSize, posteSize, posteSize / 2));
+
+            // Dibujar número del poste
             g2d.setColor(Color.WHITE);
-            String numeroVertice = String.valueOf(entry.getKey());
-            int textoX = p.x - g2d.getFontMetrics().stringWidth(numeroVertice) / 2;
-            int textoY = p.y + g2d.getFontMetrics().getAscent() / 2 - 2;
-            g2d.drawString(numeroVertice, textoX, textoY); // Dibuja el número del vértice
+            g2d.setFont(new Font("Arial", Font.BOLD, 14));
+            String numeroPoste = "P" + entry.getKey();
+            FontMetrics fm = g2d.getFontMetrics();
+            int textoX = p.x - fm.stringWidth(numeroPoste) / 2;
+            int textoY = p.y + posteSize / 2 + fm.getAscent();
+            g2d.drawString(numeroPoste, textoX, textoY);
         }
     }
+
+    public void setAristasDestacadas(List<Arista> destacadas) {
+        this.cablesDestacados = destacadas;
+        repaint();
+    }
 }
+
+

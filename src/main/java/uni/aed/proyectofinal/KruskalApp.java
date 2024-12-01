@@ -114,17 +114,20 @@ private Grafo grafo;
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 368, Short.MAX_VALUE)
+            .addGap(0, 371, Short.MAX_VALUE)
         );
 
         ShowTeoria.setText("Teoria");
+        ShowTeoria.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ShowTeoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ShowTeoriaActionPerformed(evt);
             }
         });
 
+        Reiniciar2.setBackground(new java.awt.Color(255, 255, 204));
         Reiniciar2.setText("Reiniciar");
+        Reiniciar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Reiniciar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Reiniciar2ActionPerformed(evt);
@@ -140,42 +143,60 @@ private Grafo grafo;
             }
         });
 
+        AñadirParadero.setBackground(new java.awt.Color(204, 255, 204));
         AñadirParadero.setText("Agregar Poste");
+        AñadirParadero.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         AñadirParadero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AñadirParaderoActionPerformed(evt);
             }
         });
 
+        EliminarParadero.setBackground(new java.awt.Color(255, 204, 153));
         EliminarParadero.setText("Quitar Poste");
+        EliminarParadero.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         EliminarParadero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarParaderoActionPerformed(evt);
             }
         });
 
+        AñadirAvenida.setBackground(new java.awt.Color(204, 255, 204));
         AñadirAvenida.setText("Agregar Camino");
+        AñadirAvenida.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         AñadirAvenida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AñadirAvenidaActionPerformed(evt);
             }
         });
 
+        EliminarAvenida.setBackground(new java.awt.Color(255, 204, 153));
         EliminarAvenida.setText("Quitar Camino");
+        EliminarAvenida.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         EliminarAvenida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarAvenidaActionPerformed(evt);
             }
         });
 
+        CalcularCaminoEficiente.setBackground(new java.awt.Color(204, 255, 255));
         CalcularCaminoEficiente.setText("Calcular Costo Minimo (S/.12 /metro)");
+        CalcularCaminoEficiente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         CalcularCaminoEficiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CalcularCaminoEficienteActionPerformed(evt);
             }
         });
 
+        GenerarRutadeEjemplo.setBackground(new java.awt.Color(51, 51, 255));
+        GenerarRutadeEjemplo.setForeground(new java.awt.Color(255, 255, 255));
         GenerarRutadeEjemplo.setText("Generar Ruta de Ejemplo");
+        GenerarRutadeEjemplo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        GenerarRutadeEjemplo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerarRutadeEjemploActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("CostoMinimo:");
 
@@ -689,6 +710,50 @@ private Grafo grafo;
             grafo.sumPeso=0;
         }        
     }//GEN-LAST:event_CalcularCaminoEficienteActionPerformed
+
+    private void GenerarRutadeEjemploActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarRutadeEjemploActionPerformed
+        // TODO add your handling code here:
+       // Clear existing graph
+        grafo = new Grafo();
+        posicionesVertices.clear();
+        idVertice = 1;
+
+        // Add vertices in the pattern shown
+        // First row (1, 2, 3)
+        grafo.agregarVertice(1);
+        posicionesVertices.put(1, new Point(100, 100));
+    
+        grafo.agregarVertice(2);
+        posicionesVertices.put(2, new Point(350, 100));
+    
+        grafo.agregarVertice(3);
+        posicionesVertices.put(3, new Point(600, 100));
+
+        // Second row (5, 6, 7)
+        grafo.agregarVertice(5);
+        posicionesVertices.put(5, new Point(100, 300));
+    
+        grafo.agregarVertice(6);
+        posicionesVertices.put(6, new Point(350, 300));
+    
+        grafo.agregarVertice(7);
+        posicionesVertices.put(7, new Point(600, 300));
+
+        // Add edges with weights
+        grafo.agregarArista(1, 2, 4);
+        grafo.agregarArista(2, 3, 3);
+        grafo.agregarArista(1, 5, 2);
+        grafo.agregarArista(2, 6, 5);
+        grafo.agregarArista(3, 7, 4);
+        grafo.agregarArista(5, 6, 3);
+        grafo.agregarArista(6, 7, 2);
+
+        // Update the display
+        actualizarGrafico();
+        Info.setText("Grafo de ejemplo generado con 6 vértices y 7 aristas.");
+        
+        
+    }//GEN-LAST:event_GenerarRutadeEjemploActionPerformed
 private void agregarVerticeGraficamente(int x, int y) {
     for (Point p : posicionesVertices.values()) {
         if (Math.abs(p.x - x) <= 20 && Math.abs(p.y - y) <= 20) { // Distancia mínima para evitar solapamiento
