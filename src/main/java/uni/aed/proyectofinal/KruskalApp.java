@@ -413,6 +413,7 @@ private Grafo grafo;
 
     private void BorrarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarVerticeActionPerformed
         Info.setText("Haga clic en un vértice para eliminarlo.");
+        
         jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -516,7 +517,16 @@ private Grafo grafo;
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void InsertarAristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarAristaActionPerformed
-        // TODO add your handling code here:
+        if (posicionesVertices.isEmpty()) {
+            Info.setText("No hay suficientes vértices para crear una arista.");
+            return;
+        }
+
+        if (posicionesVertices.size() < 2) {
+            Info.setText("Debe haber al menos 2 vértices para crear una arista.");
+            return;
+        }
+           
         modoInsertarArista = true; // Define un modo para insertar aristas
         Info.setText("Seleccione el primer vértice para la arista.");
         jPanel4.repaint();
@@ -526,7 +536,7 @@ private Grafo grafo;
     }//GEN-LAST:event_InsertarAristaActionPerformed
 
     private void InsertarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarVerticeActionPerformed
-        // TODO add your handling code here:
+
         modoInsertarVertice = true;
         Info.setText("Haga clic en el panel para insertar un vértice.");
 
@@ -549,7 +559,13 @@ private Grafo grafo;
         grafo = new Grafo();
         posicionesVertices.clear();
         idVertice = 1;
-        actualizarGrafico();
+        
+        panelGrafico.setAristasDestacadas(null);
+        panelGrafico2.setAristasDestacadas(null);
+        
+        panelGrafico.repaint();
+        panelGrafico2.repaint();
+        
         Info.setText("Grafo reiniciado.");
     }//GEN-LAST:event_ReiniciarActionPerformed
 
@@ -558,12 +574,21 @@ private Grafo grafo;
         grafo = new Grafo();
         posicionesVertices.clear();
         idVertice = 1;
-        actualizarGrafico();
+        
+        panelGrafico.setAristasDestacadas(null);
+        panelGrafico2.setAristasDestacadas(null);
+        verticeSeleccionado1 = null;
+        verticeSeleccionado2 = null;
+        modoInsertarArista = false;
+        modoInsertarVertice = false;
+        panelGrafico.repaint();
+        panelGrafico2.repaint();
         Info.setText("Grafo reiniciado.");
     }//GEN-LAST:event_Reiniciar2ActionPerformed
 
     private void EliminarParaderoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarParaderoActionPerformed
         Info.setText("Haga clic en un paradero para eliminarlo.");
+
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -590,6 +615,15 @@ private Grafo grafo;
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void AñadirParaderoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirParaderoActionPerformed
+        if (posicionesVertices.isEmpty()) {
+            Info.setText("No hay suficientes vértices para crear una arista.");
+            return;
+        }
+
+        if (posicionesVertices.size() < 2) {
+            Info.setText("Debe haber al menos 2 vértices para crear una arista.");
+            return;
+        }
         modoInsertarVertice = true;
         Info.setText("Haga clic en el panel para agregar un paradero.");
         jPanel4.repaint();
@@ -663,24 +697,38 @@ private Grafo grafo;
         }        
     }//GEN-LAST:event_CalcularCaminoEficienteActionPerformed
 private void agregarVerticeGraficamente(int x, int y) {
+    for (Point p : posicionesVertices.values()) {
+        if (Math.abs(p.x - x) <= 20 && Math.abs(p.y - y) <= 20) { // Distancia mínima para evitar solapamiento
+            Info.setText("Ya existe un vértice cerca de esta posición. Intente en otro lugar.");
+            return; // No agrega el vértice
+        }
+    }
+    grafo.agregarVertice(idVertice);
+    posicionesVertices.put(idVertice, new Point(x, y));
+    
     Graphics g = jPanel4.getGraphics();
     Graphics g2 = jPanel2.getGraphics();
-        g.setColor(Color.BLACK);
-        g.fillOval(x - 10, y - 10, 20, 20);
-        g.setColor(Color.WHITE);
-        g2.setColor(Color.BLACK);
-        g2.fillOval(x - 10, y - 10, 20, 20);
-        g2.setColor(Color.WHITE);
-        String numeroVertice = String.valueOf(idVertice);
-        int textoX = x - g.getFontMetrics().stringWidth(numeroVertice) / 2;
-        int textoY = y + g.getFontMetrics().getAscent() / 2 - 2;
-        g.drawString(numeroVertice, textoX, textoY);
+    
+    g.setColor(Color.BLACK);
+    g.fillOval(x - 10, y - 10, 20, 20);
+    g.setColor(Color.WHITE);
+    g2.setColor(Color.BLACK);
+    g2.fillOval(x - 10, y - 10, 20, 20);
+    g2.setColor(Color.WHITE);
+    
+    String numeroVertice = String.valueOf(idVertice);
+    int textoX = x - g.getFontMetrics().stringWidth(numeroVertice) / 2;
+    int textoY = y + g.getFontMetrics().getAscent() / 2 - 2;
+    g.drawString(numeroVertice, textoX, textoY);
+    g2.drawString(numeroVertice, textoX, textoY);
+
         
-        grafo.agregarVertice(idVertice);
-        posicionesVertices.put(idVertice, new Point(x, y));
-        idVertice++;
-        Info.setText("Vértice " + (idVertice - 1) + " agregado.");
-        actualizarGrafico();
+    grafo.agregarVertice(idVertice);
+    posicionesVertices.put(idVertice, new Point(x, y));
+    idVertice++;
+    
+    Info.setText("Vértice " + (idVertice - 1) + " agregado.");
+    actualizarGrafico();
 }
 private void actualizarGrafico() {
         panelGrafico.repaint();
