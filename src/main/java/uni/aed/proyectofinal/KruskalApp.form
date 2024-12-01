@@ -35,7 +35,7 @@
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,50 +60,44 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="AñadirAvenida" min="-2" pref="133" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="EliminarAvenida" min="-2" pref="136" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="CalcularCaminoEficiente" min="-2" pref="287" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="AñadirParadero" min="-2" pref="133" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="EliminarParadero" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="GenerarRutadeEjemplo" min="-2" pref="243" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="ShowTeoria" min="-2" pref="118" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="Reiniciar2" min="-2" pref="107" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="AñadirAvenida" min="-2" pref="133" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="EliminarAvenida" min="-2" pref="136" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="CalcularCaminoEficiente" min="-2" pref="287" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="AñadirParadero" min="-2" pref="133" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="Salir" min="-2" pref="106" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Component id="EliminarParadero" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="GenerarRutadeEjemplo" min="-2" pref="243" max="-2" attributes="0"/>
+                              <Component id="costoMin" min="-2" pref="273" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="ShowTeoria" min="-2" pref="118" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="Reiniciar2" min="-2" pref="107" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="Salir" min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -113,17 +107,21 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="AñadirParadero" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="EliminarParadero" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="AñadirParadero" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EliminarParadero" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="costoMin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="AñadirAvenida" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="EliminarAvenida" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="GenerarRutadeEjemplo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -151,7 +149,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="718" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="688" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -195,7 +193,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="A&#xf1;adirParadero">
           <Properties>
-            <Property name="text" type="java.lang.String" value="A&#xf1;adir Paradero"/>
+            <Property name="text" type="java.lang.String" value="Agregar Poste"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="A&#xf1;adirParaderoActionPerformed"/>
@@ -203,7 +201,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="EliminarParadero">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar Paradero"/>
+            <Property name="text" type="java.lang.String" value="Quitar Poste"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarParaderoActionPerformed"/>
@@ -211,7 +209,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="A&#xf1;adirAvenida">
           <Properties>
-            <Property name="text" type="java.lang.String" value="A&#xf1;adir Avenida"/>
+            <Property name="text" type="java.lang.String" value="Agregar Camino"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="A&#xf1;adirAvenidaActionPerformed"/>
@@ -219,7 +217,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="EliminarAvenida">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar Avenida"/>
+            <Property name="text" type="java.lang.String" value="Quitar Camino"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarAvenidaActionPerformed"/>
@@ -227,7 +225,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="CalcularCaminoEficiente">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Calcular Camino Eficiente"/>
+            <Property name="text" type="java.lang.String" value="Calcular Costo Minimo (S/.12 /metro)"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CalcularCaminoEficienteActionPerformed"/>
@@ -238,14 +236,17 @@
             <Property name="text" type="java.lang.String" value="Generar Ruta de Ejemplo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Curso:"/>
+            <Property name="text" type="java.lang.String" value="CostoMinimo:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="costoMin">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="CM"/>
           </Properties>
         </Component>
       </SubComponents>
