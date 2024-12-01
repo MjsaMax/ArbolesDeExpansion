@@ -13,6 +13,7 @@ import java.util.*;
 class Grafo {
     private List<Vertice> vertices;
     private List<Arista> aristas;
+    int sumPeso;
 
     public Grafo() {
         vertices = new ArrayList<>();
@@ -53,7 +54,7 @@ class Grafo {
         List<Arista> resultado = new ArrayList<>();
         List<Arista> aristasOrdenadas = new ArrayList<>(aristas);
         Collections.sort(aristasOrdenadas);
-
+        
         Map<Integer, Integer> conjuntos = new HashMap<>();
         for (Vertice v : vertices) {
             conjuntos.put(v.getId(), v.getId());
@@ -62,8 +63,9 @@ class Grafo {
         for (Arista a : aristasOrdenadas) {
             int raizOrigen = encontrarRaiz(conjuntos, a.getOrigen());
             int raizDestino = encontrarRaiz(conjuntos, a.getDestino());
-
+            
             if (raizOrigen != raizDestino) {
+                sumPeso=sumPeso+a.getPeso();
                 resultado.add(a);
                 conjuntos.put(raizOrigen, raizDestino);
             }
