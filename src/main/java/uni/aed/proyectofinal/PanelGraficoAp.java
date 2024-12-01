@@ -37,10 +37,11 @@ public class PanelGraficoAp extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+        Graphics2D g2d = (Graphics2D) g;
+
         // Dibujar la imagen de fondo para que llene todo el panel
+        
         if (fondo != null) {
-            Graphics2D g2d = (Graphics2D) g;
             // Activar antialiasing para mejor calidad
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
@@ -48,8 +49,13 @@ public class PanelGraficoAp extends JPanel {
             // Dibujar la imagen escalada para llenar todo el panel
             g2d.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
         }
+        
+        g2d.setColor(new Color(200, 200, 200)); // Color gris claro para el grid
+        int gridSize = 50; // Tamaño del espacio entre líneas del grid
 
-        Graphics2D g2d = (Graphics2D) g;
+    
+        
+        //crea antialiasing para aristas y vertices
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Dibujar las aristas
