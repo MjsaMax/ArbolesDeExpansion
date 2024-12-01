@@ -27,7 +27,7 @@ public class PanelGraficoAppInside extends JPanel {
 
     private void cargarFondoCiudad() {
         try {
-            fondoCiudad = new ImageIcon(getClass().getResource("/imagenes/fondo_ciudad_electrica.png")).getImage();
+            fondoCiudad = new ImageIcon(getClass().getResource("src\\test\\java\\Fondo2.png")).getImage();
         } catch (Exception e) {
             System.err.println("Error al cargar la imagen de fondo: " + e.getMessage());
         }
@@ -40,8 +40,9 @@ public class PanelGraficoAppInside extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Dibujar fondo de la ciudad
-        if (fondoCiudad != null) {
-            g2d.drawImage(fondoCiudad, 0, 0, getWidth(), getHeight(), this);
+        if (fondoCiudad == null) {
+        g2d.setColor(new Color(10, 10, 50)); // Cambia este color al que prefieras
+        g2d.fillRect(0, 0, getWidth(), getHeight());
         }
 
         // Dibujar cables (aristas)
@@ -50,10 +51,10 @@ public class PanelGraficoAppInside extends JPanel {
             Point fin = posicionesPostes.get(a.getDestino());
             if (inicio != null && fin != null) {
                 if (cablesDestacados != null && cablesDestacados.contains(a)) {
-                    g2d.setColor(new Color(255, 215, 0, 200)); // Dorado semi-transparente para cables destacados
+                    g2d.setColor(new Color(255,204,0)); // Dorado semi-transparente para cables destacados
                     g2d.setStroke(new BasicStroke(6f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                 } else {
-                    g2d.setColor(new Color(50, 50, 50, 150)); // Gris oscuro semi-transparente para cables normales
+                    g2d.setColor(new Color(51,51,255)); // Gris oscuro semi-transparente para cables normales
                     g2d.setStroke(new BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                 }
                 g2d.draw(new Line2D.Float(inicio, fin));
