@@ -4,6 +4,7 @@
  */
 package uni.aed.proyectofinal;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -25,7 +26,7 @@ private Grafo grafo;
     private Vertice verticeSeleccionado1 = null;
     private Vertice verticeSeleccionado2 = null;
     private Map<Integer, Point> posicionesVertices;
-
+    private PanelGrafico panelGrafico;
     /**
      * Creates new form KruskalApp
      */
@@ -37,6 +38,12 @@ private Grafo grafo;
         posicionesVertices = new HashMap<>();
         jPanel1.setVisible(false);
         jPanel3.setVisible(true);
+        panelGrafico = new PanelGrafico(grafo, posicionesVertices);
+        panelGrafico.setBackground(Color.WHITE); // Fondo del panel gráfico
+        jPanel4.setLayout(new BorderLayout()); // Asegúrate de que el layout sea apropiado
+        jPanel4.add(panelGrafico, BorderLayout.CENTER);
+        
+        pack();
     }
 
     /**
@@ -287,19 +294,28 @@ private Grafo grafo;
     }// </editor-fold>//GEN-END:initComponents
 
     private void BorrarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarVerticeActionPerformed
-        // TODO add your handling code here:
-        String input = JOptionPane.showInputDialog(this, "Ingrese el ID del vértice a borrar:");
-        try {
-            int id = Integer.parseInt(input);
-            if (grafo.borrarVertice(id)) {
-                actualizarGrafico();
-                Info.setText("Vértice " + id + " borrado con éxito.");
-            } else {
-                Info.setText("No se pudo borrar el vértice " + id + ".");
+        Info.setText("Haga clic en un vértice para eliminarlo.");
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Vertice verticeCercano = obtenerVerticeCercano(evt.getX(), evt.getY());
+                if (verticeCercano != null) {
+                    int id = verticeCercano.getId();
+                    if (grafo.borrarVertice(id)) {
+                        posicionesVertices.remove(id); // Elimina la posición del vértice
+                        panelGrafico.repaint();
+                        Info.setText("Vértice " + id + " borrado con éxito.");
+                    } else {
+                        Info.setText("No se pudo borrar el vértice " + id + ".");
+                    }
+                } else {
+                    Info.setText("No se encontró ningún vértice cerca del clic.");
+                }
+                // Elimina el listener para evitar conflictos
+                jPanel4.removeMouseListener(this);
             }
-        } catch (NumberFormatException e) {
-            Info.setText("Por favor, ingrese un número válido.");
-        }
+        });
+       
     }//GEN-LAST:event_BorrarVerticeActionPerformed
 
     private void BorrarAristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarAristaActionPerformed
@@ -356,6 +372,12 @@ private Grafo grafo;
                     Info.setText("Seleccione el segundo vértice para la arista.");
                 } else {
                     verticeSeleccionado2 = v;
+                    if (verticeSeleccionado1.getId() == verticeSeleccionado2.getId()) {
+                        Info.setText("No puedes agregar una arista entre un vértice y él mismo. Intente de nuevo");
+                        verticeSeleccionado1 = null;
+                        verticeSeleccionado2 = null;
+                        return; // Detener aquí, no agregar la arista
+                    }
                     String pesoStr = JOptionPane.showInputDialog(this, "Ingrese el peso de la arista:");
                     try {
                         int peso = Integer.parseInt(pesoStr);
@@ -421,40 +443,12 @@ private void agregarVerticeGraficamente(int x, int y) {
         Info.setText("Vértice " + (idVertice - 1) + " agregado.");
 }
 private void actualizarGrafico() {
-        actualizarGrafico(null);
+        panelGrafico.repaint();
     }
 private void actualizarGrafico(List<Arista> destacadas) {
-        Graphics g = jPanel4.getGraphics();
-        g.clearRect(0, 0, jPanel4.getWidth(), jPanel4.getHeight());
+    panelGrafico.setAristasDestacadas(destacadas);
+}
 
-        for (Arista a : grafo.getAristas()) {
-            Point p1 = posicionesVertices.get(a.getOrigen());
-            Point p2 = posicionesVertices.get(a.getDestino());
-            if (p1 != null && p2 != null) {
-                if (destacadas != null && destacadas.contains(a)) {
-                    g.setColor(Color.RED);
-                } else {
-                    g.setColor(Color.BLACK);
-                }
-                g.drawLine(p1.x, p1.y, p2.x, p2.y);
-                // Dibujar el peso de la arista
-                int midX = (p1.x + p2.x) / 2;
-                int midY = (p1.y + p2.y) / 2;
-                g.drawString(String.valueOf(a.getPeso()), midX, midY);
-            }
-        }
-
-        for (Map.Entry<Integer, Point> entry : posicionesVertices.entrySet()) {
-            Point p = entry.getValue();
-            g.setColor(Color.BLACK);
-            g.fillOval(p.x - 10, p.y - 10, 20, 20);
-            g.setColor(Color.WHITE);
-            String numeroVertice = String.valueOf(entry.getKey());
-            int textoX = p.x - g.getFontMetrics().stringWidth(numeroVertice) / 2;
-            int textoY = p.y + g.getFontMetrics().getAscent() / 2 - 2;
-            g.drawString(numeroVertice, textoX, textoY);
-        }
-    }
 private Vertice obtenerVerticeCercano(int x, int y) {
         for (Map.Entry<Integer, Point> entry : posicionesVertices.entrySet()) {
             Point p = entry.getValue();
