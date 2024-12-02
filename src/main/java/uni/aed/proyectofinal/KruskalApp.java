@@ -567,40 +567,76 @@ private Grafo grafo;
         } else {
             actualizarGrafico(arbolExpansionMinima);
             Info.setText("Árbol de expansión mínima generado con éxito. \nEl costo minimo es: "+grafo.sumPeso);
-            costoMin.setText(""+grafo.sumPeso*12+"Soles de Cable");
+            costoMin.setText("S/."+grafo.sumPeso*12+" de Cable para instalar.");
             grafo.sumPeso=0;
         }
     }//GEN-LAST:event_KruskalActionPerformed
 
     private void ReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarActionPerformed
-        // TODO add your handling code here:
         grafo = new Grafo();
         posicionesVertices.clear();
         idVertice = 1;
-        
+
         panelGrafico.setAristasDestacadas(null);
         panelGrafico2.setAristasDestacadas(null);
+  
+
+        // Create new instances of the panels with the reset graph
+        panelGrafico = new PanelGrafico(grafo, posicionesVertices);
+        panelGrafico2 = new PanelGraficoAppInside(grafo, posicionesVertices);
+
+
         
-        panelGrafico.repaint();
-        panelGrafico2.repaint();
-        
+        // Remove old panels and add new ones
+        jPanel4.removeAll();
+        jPanel4.setLayout(new BorderLayout());
+        jPanel4.add(panelGrafico, BorderLayout.CENTER);
+        jPanel2.removeAll();
+        jPanel2.setLayout(new BorderLayout());
+        jPanel2.add(panelGrafico2, BorderLayout.CENTER);
+ 
+
+        // Revalidate and repaint all panels
+        jPanel4.revalidate();
+        jPanel4.repaint();
+        jPanel2.revalidate();
+        jPanel2.repaint();
+  
+
         Info.setText("Grafo reiniciado.");
     }//GEN-LAST:event_ReiniciarActionPerformed
 
     private void Reiniciar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reiniciar2ActionPerformed
-        // TODO add your handling code here:
-        grafo = new Grafo();
+             grafo = new Grafo();
         posicionesVertices.clear();
         idVertice = 1;
-        
+
         panelGrafico.setAristasDestacadas(null);
         panelGrafico2.setAristasDestacadas(null);
-        verticeSeleccionado1 = null;
-        verticeSeleccionado2 = null;
-        modoInsertarArista = false;
-        modoInsertarVertice = false;
-        panelGrafico.repaint();
-        panelGrafico2.repaint();
+  
+
+        // Create new instances of the panels with the reset graph
+        panelGrafico = new PanelGrafico(grafo, posicionesVertices);
+        panelGrafico2 = new PanelGraficoAppInside(grafo, posicionesVertices);
+
+
+        
+        // Remove old panels and add new ones
+        jPanel4.removeAll();
+        jPanel4.setLayout(new BorderLayout());
+        jPanel4.add(panelGrafico, BorderLayout.CENTER);
+        jPanel2.removeAll();
+        jPanel2.setLayout(new BorderLayout());
+        jPanel2.add(panelGrafico2, BorderLayout.CENTER);
+ 
+
+        // Revalidate and repaint all panels
+        jPanel4.revalidate();
+        jPanel4.repaint();
+        jPanel2.revalidate();
+        jPanel2.repaint();
+  
+
         Info.setText("Grafo reiniciado.");
     }//GEN-LAST:event_Reiniciar2ActionPerformed
 
@@ -629,15 +665,7 @@ private Grafo grafo;
     }//GEN-LAST:event_EliminarParaderoActionPerformed
 
     private void AñadirParaderoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirParaderoActionPerformed
-        if (posicionesVertices.isEmpty()) {
-            Info.setText("No hay suficientes vértices para crear una arista.");
-            return;
-        }
 
-        if (posicionesVertices.size() < 2) {
-            Info.setText("Debe haber al menos 2 vértices para crear una arista.");
-            return;
-        }
         modoInsertarVertice = true;
         Info.setText("Haga clic en el panel para agregar un paradero.");
         jPanel4.repaint();
@@ -645,6 +673,7 @@ private Grafo grafo;
     }//GEN-LAST:event_AñadirParaderoActionPerformed
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        // TODO add your handling code here:
         if (modoInsertarVertice) {
             agregarVerticeGraficamente(evt.getX(), evt.getY());
             modoInsertarVertice = false;
@@ -707,6 +736,7 @@ private Grafo grafo;
         } else {
             actualizarGrafico(arbolExpansionMinima);
             Info.setText("Árbol de expansión mínima generado con éxito. \nEl costo minimo es: "+grafo.sumPeso);
+            costoMin.setText("S/."+grafo.sumPeso*12+" de Cable para instalar.");
             grafo.sumPeso=0;
         }        
     }//GEN-LAST:event_CalcularCaminoEficienteActionPerformed
