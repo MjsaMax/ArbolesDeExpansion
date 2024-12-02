@@ -79,7 +79,6 @@ private Grafo grafo;
         AñadirAvenida = new javax.swing.JButton();
         EliminarAvenida = new javax.swing.JButton();
         CalcularCaminoEficiente = new javax.swing.JButton();
-        GenerarRutadeEjemplo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         costoMin = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -188,16 +187,6 @@ private Grafo grafo;
             }
         });
 
-        GenerarRutadeEjemplo.setBackground(new java.awt.Color(51, 51, 255));
-        GenerarRutadeEjemplo.setForeground(new java.awt.Color(255, 255, 255));
-        GenerarRutadeEjemplo.setText("Generar Ruta de Ejemplo");
-        GenerarRutadeEjemplo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        GenerarRutadeEjemplo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GenerarRutadeEjemploActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("CostoMinimo:");
 
         costoMin.setBackground(new java.awt.Color(255, 255, 255));
@@ -222,17 +211,15 @@ private Grafo grafo;
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(GenerarRutadeEjemplo, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(costoMin, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(ShowTeoria, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(Reiniciar2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(costoMin, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -245,18 +232,15 @@ private Grafo grafo;
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(AñadirParadero)
-                        .addComponent(EliminarParadero))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(costoMin)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AñadirParadero)
+                    .addComponent(EliminarParadero))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AñadirAvenida)
                     .addComponent(EliminarAvenida)
-                    .addComponent(GenerarRutadeEjemplo))
+                    .addComponent(jLabel1)
+                    .addComponent(costoMin))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ShowTeoria)
@@ -740,50 +724,6 @@ private Grafo grafo;
             grafo.sumPeso=0;
         }        
     }//GEN-LAST:event_CalcularCaminoEficienteActionPerformed
-
-    private void GenerarRutadeEjemploActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarRutadeEjemploActionPerformed
-        // TODO add your handling code here:
-       // Clear existing graph
-        grafo = new Grafo();
-        posicionesVertices.clear();
-        idVertice = 1;
-
-        // Add vertices in the pattern shown
-        // First row (1, 2, 3)
-        grafo.agregarVertice(1);
-        posicionesVertices.put(1, new Point(100, 100));
-    
-        grafo.agregarVertice(2);
-        posicionesVertices.put(2, new Point(350, 100));
-    
-        grafo.agregarVertice(3);
-        posicionesVertices.put(3, new Point(600, 100));
-
-        // Second row (5, 6, 7)
-        grafo.agregarVertice(5);
-        posicionesVertices.put(5, new Point(100, 300));
-    
-        grafo.agregarVertice(6);
-        posicionesVertices.put(6, new Point(350, 300));
-    
-        grafo.agregarVertice(7);
-        posicionesVertices.put(7, new Point(600, 300));
-
-        // Add edges with weights
-        grafo.agregarArista(1, 2, 4);
-        grafo.agregarArista(2, 3, 3);
-        grafo.agregarArista(1, 5, 2);
-        grafo.agregarArista(2, 6, 5);
-        grafo.agregarArista(3, 7, 4);
-        grafo.agregarArista(5, 6, 3);
-        grafo.agregarArista(6, 7, 2);
-
-        // Update the display
-        actualizarGrafico();
-        Info.setText("Grafo de ejemplo generado con 6 vértices y 7 aristas.");
-        
-        
-    }//GEN-LAST:event_GenerarRutadeEjemploActionPerformed
 private void agregarVerticeGraficamente(int x, int y) {
     for (Point p : posicionesVertices.values()) {
         if (Math.abs(p.x - x) <= 20 && Math.abs(p.y - y) <= 20) { // Distancia mínima para evitar solapamiento
@@ -869,7 +809,6 @@ private Vertice obtenerVerticeCercano(int x, int y) {
     private javax.swing.JButton CalcularCaminoEficiente;
     private javax.swing.JButton EliminarAvenida;
     private javax.swing.JButton EliminarParadero;
-    private javax.swing.JButton GenerarRutadeEjemplo;
     private javax.swing.JTextArea Info;
     private javax.swing.JButton InsertarArista;
     private javax.swing.JButton InsertarVertice;
