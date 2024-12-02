@@ -644,6 +644,7 @@ private Grafo grafo;
                     Info.setText("No se encontró ningún paradero cerca del clic.");
                 }
                 jPanel2.removeMouseListener(this); // Elimina el listener después de la acción
+            
             }
         });
     }//GEN-LAST:event_EliminarParaderoActionPerformed
